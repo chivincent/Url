@@ -15,6 +15,11 @@
             "Chivincent\\Url\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "test/"
+        }
+    },
     "authors": [
         {
             "name": "Vincent Chi",

@@ -1,0 +1,25 @@
+{
+    "name": "chivincent/url",
+    "description": "The URL foundation, made with FFI and libcurl",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "ext-ffi": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Chivincent\\Url\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vincent Chi",
+            "email": "song374561@chivincent.net"
+        }
+    ],
+    "minimum-stability": "stable"
+}

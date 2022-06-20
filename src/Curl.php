@@ -17,6 +17,14 @@ class Curl
             $libcurl ?: $this->libcurl(),
         );
         $this->curl = $this->ffi->curl_url();
+        if (FFI::isNull($this->curl)) {
+            throw new RuntimeException('Cannot create new CURLU handle.');
+        }
+    }
+
+    public function __destruct()
+    {
+        $this->ffi->curl_url_cleanup($this->curl);
     }
 
     public function urlSet(string $url)
@@ -45,7 +53,10 @@ class Curl
             throw new RuntimeException('curl_url_get failed: ' . $result);
         }
 
-        return FFI::string($buf);
+        $ret = FFI::string($buf);
+        $this->ffi->curl_free($buf);
+
+        return $ret;
     }
 
     protected function libcurl(): string
@@ -54,7 +65,7 @@ class Curl
             'Windows' => PHP_INT_SIZE === 4 ? 'libcurl-x86.dll' : 'libcurl-x64.dll',
             'Darwin' => 'libcurl.dylib',
             'Linux' => 'libcurl.so',
-            default => throw new RuntimeException(),
+            default => throw new RuntimeException('Unsupported OS: ' . PHP_OS_FAMILY),
         };
     }
 }

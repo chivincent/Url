@@ -76,3 +76,5 @@ typedef enum {
 CURLU *curl_url();
 CURLUcode curl_url_set(CURLU *url, CURLUPart part, const char *content, unsigned int flags);
 CURLUcode curl_url_get(CURLU *url, CURLUPart what, char **part, unsigned int flags);
+void curl_free(char *ptr);
+void curl_url_cleanup(CURLU *handle);
